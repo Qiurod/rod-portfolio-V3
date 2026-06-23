@@ -188,7 +188,37 @@ section{padding:96px 6vw}
 .case-media{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
 .case-media .wide{grid-column:span 12}.case-media .half{grid-column:span 6}.case-media .third{grid-column:span 4}
 .case-media .frame{background:#fff}.case-media .meta{margin-bottom:8px;padding-top:0}
-@media(max-width:980px){.case-card{grid-template-columns:1fr}.case-media .half,.case-media .third{grid-column:span 12}}
+
+/* Apparel case: show Illustrator / Spec as the primary development evidence,
+   and keep AI on-body visualization clearly secondary. */
+.case-card.apparel-case .case-media{grid-template-columns:repeat(6,1fr);gap:16px 16px;align-items:start}
+.case-card.apparel-case .case-media .third{grid-column:span 3}
+.case-card.apparel-case .case-media .onbody{grid-column:span 6;max-width:520px;justify-self:center}
+.case-card.apparel-case .tech-frame{aspect-ratio:16/9}
+.case-card.apparel-case .ai-frame{aspect-ratio:4/5;max-height:560px}
+.case-card.apparel-case .tech-frame img,
+.case-card.apparel-case .ai-frame img{width:100%;height:100%;object-fit:contain;background:#fff}
+.case-card.apparel-case .tech-frame img{padding:8px}
+
+/* Apparel archive: consistent product-board rhythm instead of one huge AI mockup. */
+.apparel-board{gap:40px 24px;align-items:start}
+.apparel-board .sheet{display:flex;flex-direction:column}
+.apparel-board .frame{aspect-ratio:4/3;background:#fff}
+.apparel-board .frame[data-code*="ON-BODY"]{aspect-ratio:4/5}
+.apparel-board .frame img{width:100%;height:100%;object-fit:contain;background:#fff;padding:10px}
+.apparel-board .frame[data-code*="ON-BODY"] img{padding:0}
+.apparel-board .cap{max-width:none}
+
+@media(max-width:980px){
+  .case-card{grid-template-columns:1fr}
+  .case-media .half,.case-media .third{grid-column:span 12}
+  .case-card.apparel-case .case-media .third,
+  .case-card.apparel-case .case-media .onbody{grid-column:span 6;max-width:none}
+}
+@media(max-width:680px){
+  .case-card.apparel-case .case-media .third,
+  .case-card.apparel-case .case-media .onbody{grid-column:span 6}
+}
 
 .archive-note{max-width:840px;margin:-28px 0 48px;color:#3c3f41;border-left:3px solid var(--red);padding-left:18px}
 .disclosure{max-width:880px;margin:-24px 0 48px;padding:13px 16px;border:1px solid var(--line);background:#fff;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:#3c3f41}
@@ -291,8 +321,8 @@ footer .big a:hover{color:var(--red);border-color:var(--red)}
     </ul>
   </div>
   <figure class="hero-img rv">
-    <span class="tag">KOGENKI — FOOTWEAR / ACCESSORY / LIFESTYLE CAMPAIGN</span>
-    <img src="assets/kv-hero-ride.jpg" alt="KOGENKI 鞋類品牌形象視覺，騎乘動態街拍" loading="eager">
+    <span class="tag">KOGENKI — HELMET / GLOVE / LIFESTYLE CAMPAIGN</span>
+    <img src="assets/kv-brand-helmet-glove.jpg" alt="KOGENKI 安全帽與手套品牌形象主視覺，騎士坐於機車上的生活風格情境" loading="eager">
   </figure>
 </section>
 
@@ -364,7 +394,7 @@ footer .big a:hover{color:var(--red);border-color:var(--red)}
       </div>
     </article>
 
-    <article class="case-card rv">
+    <article class="case-card apparel-case rv">
       <div class="case-copy">
         <span class="case-kicker">Case 03 / Apparel Concept</span>
         <h3>VELORA Jacket<br>Illustrator Flat to AI Visualization</h3>
@@ -380,15 +410,15 @@ footer .big a:hover{color:var(--red);border-color:var(--red)}
       <div class="case-media">
         <figure class="third">
           <div class="meta"><b>ILLUSTRATOR</b><span>TECHNICAL FLAT</span></div>
-          <div class="frame" data-code="CASE 03 — VELORA ILLUSTRATOR FLAT"><span class="tick"></span><img src="assets/apparel-velora-cad.jpg" alt="VELORA 半網布防摔外套工程圖" loading="lazy"></div>
+          <div class="frame tech-frame" data-code="CASE 03 — VELORA ILLUSTRATOR FLAT"><span class="tick"></span><img src="assets/apparel-velora-cad.jpg" alt="VELORA 半網布防摔外套工程圖" loading="lazy"></div>
         </figure>
         <figure class="third">
           <div class="meta"><b>SPEC</b><span>MATERIAL / TRIM</span></div>
-          <div class="frame" data-code="CASE 03 — VELORA SPEC"><span class="tick"></span><img src="assets/apparel-velora-spec.jpg" alt="VELORA 材料規格製單" loading="lazy"></div>
+          <div class="frame tech-frame" data-code="CASE 03 — VELORA SPEC"><span class="tick"></span><img src="assets/apparel-velora-spec.jpg" alt="VELORA 材料規格製單" loading="lazy"></div>
         </figure>
-        <figure class="third">
+        <figure class="third onbody">
           <div class="meta"><b>AI VISUAL</b><span>ON-BODY MOCKUP</span></div>
-          <div class="frame" data-code="CASE 03 — VELORA AI VISUALIZATION"><span class="tick"></span><img src="assets/apparel-down-model.jpg" alt="VELORA 防摔外套 AI 模擬實穿視覺" loading="lazy"></div>
+          <div class="frame ai-frame" data-code="CASE 03 — VELORA AI VISUALIZATION"><span class="tick"></span><img src="assets/apparel-down-model.jpg" alt="VELORA 防摔外套 AI 模擬實穿視覺" loading="lazy"></div>
         </figure>
       </div>
     </article>
@@ -554,32 +584,32 @@ footer .big a:hover{color:var(--red);border-color:var(--red)}
   <p class="sec-lead rv">服飾線目前多為設計提案與樣品前期溝通階段，重點在於把防護、透氣、反光、安全與日常穿搭感整合在同一件衣服裡。以下產品平面圖皆以 Adobe Illustrator 繪製，搭配材料製單與 AI-assisted on-body visualization，用於對接廠商、內部提案與打樣前判斷。</p>
   <p class="disclosure rv"><b>NOTE</b> / ON-BODY VISUALS ARE AI-ASSISTED CONCEPT MOCKUPS. ILLUSTRATOR FLATS / SPEC SHEETS 表示設計與製單邏輯；未標示為 Production 或 Sample 的服飾人物圖，不等同於實際打樣品。</p>
 
-  <div class="grid">
-    <figure class="sheet s6 rv">
+  <div class="grid apparel-board">
+    <figure class="sheet s4 rv">
       <div class="meta"><b>VELORA 01</b><span>ILLUSTRATOR FLAT</span><span>半網布外套</span></div>
       <div class="frame" data-code="VELORA — TECHNICAL FLAT"><span class="tick"></span><img src="assets/apparel-velora-cad.jpg" alt="VELORA 半網布防摔外套三視工程圖，含可拆頭套" loading="lazy"></div>
       <figcaption class="cap"><strong>VELORA 半網布外套・Illustrator 工程圖</strong>——正面、側面、背面與可拆式頭套四視角，定義網布範圍、反光印刷位置與連結拉鍊結構，凸顯向量繪製與結構標示能力。</figcaption>
     </figure>
 
-    <figure class="sheet s6 rv">
+    <figure class="sheet s4 rv">
       <div class="meta"><b>VELORA 01</b><span>SPEC SHEET / 製單</span><span>01 SPEC</span></div>
       <div class="frame" data-code="VELORA — SPEC SHEET"><span class="tick"></span><img src="assets/apparel-velora-spec.jpg" alt="VELORA 防摔外套材料規格製單，標註布料、五金與工法" loading="lazy"></div>
       <figcaption class="cap"><strong>材料規格製單</strong>——逐項標註防風尼龍、大網眼、3mm 彈力抽繩、防水拉鍊等材料編號，配合領口車翻、魔鬼氈、彈力束口等工法說明，並附 KOMINE JK-179 參考樣品供工廠對位。<strong>這張即是交付工廠的開版依據</strong>。</figcaption>
     </figure>
 
-    <figure class="sheet s12 rv">
+    <figure class="sheet s4 rv">
       <div class="meta"><b>VELORA 01</b><span>AI VISUALIZATION — ON BODY</span><span>概念模擬</span></div>
       <div class="frame" data-code="VELORA — AI ON-BODY VISUALIZATION"><span class="tick"></span><img src="assets/apparel-down-model.jpg" alt="VELORA 防摔外套 AI 模擬實穿視覺，黑色全身" loading="lazy"></div>
       <figcaption class="cap"><strong>VELORA AI 模擬實穿</strong>——用於提案階段確認版型比例、網布分區與整體穿搭語氣；此圖為 AI-assisted concept mockup，非實際打樣照片。</figcaption>
     </figure>
 
-    <figure class="sheet s5 rv">
+    <figure class="sheet s4 rv">
       <div class="meta"><b>PUFFER</b><span>ILLUSTRATOR FLAT</span><span>防風羽絨</span></div>
       <div class="frame" data-code="PUFFER — TECHNICAL FLAT"><span class="tick"></span><img src="assets/apparel-down-cad.jpg" alt="防風羽絨外套工程圖，正背視角" loading="lazy"></div>
       <figcaption class="cap"><strong>防風羽絨外套・Illustrator 工程圖</strong>——以向量線稿定義格紋車線分倉、羅紋肩線與短版比例，作為提案與製單前的結構基礎。</figcaption>
     </figure>
 
-    <figure class="sheet s7 rv">
+    <figure class="sheet s4 rv">
       <div class="meta"><b>PUFFER</b><span>SPEC SHEET / 製單</span></div>
       <div class="frame" data-code="PUFFER — SPEC SHEET"><span class="tick"></span><img src="assets/apparel-down-spec.jpg" alt="防風羽絨外套規格製單，標註布料與填充" loading="lazy"></div>
       <figcaption class="cap"><strong>羽絨外套製單</strong>——標註粗羅紋布料、尼龍防潑水面料、羽絨棉填充，含織標 LOGO 與固定織帶位置，並附 ONE BOY 參考樣品。</figcaption>
@@ -591,7 +621,7 @@ footer .big a:hover{color:var(--red);border-color:var(--red)}
       <figcaption class="cap"><strong>羽絨外套 AI 模擬</strong>——用於確認方格分倉、蓬度比例與短版廓形；此圖為概念視覺，不標示為實際打樣照片。</figcaption>
     </figure>
 
-    <figure class="sheet s5 rv">
+    <figure class="sheet s4 rv">
       <div class="meta"><b>SPORT JACKET</b><span>ILLUSTRATOR FLAT</span><span>運動外套</span></div>
       <div class="frame" data-code="SPORT JACKET — FLAT"><span class="tick"></span><img src="assets/apparel-jacket2-cad.jpg" alt="運動外套工程圖，含頭套與多視角配色" loading="lazy"></div>
       <figcaption class="cap"><strong>運動外套・多配色工程圖</strong>——以 Adobe Illustrator 繪製上下兩色系提案，含可拆頭套與褲裝成套規劃，呈現運動機能與日常穿搭的系列化方向。</figcaption>
