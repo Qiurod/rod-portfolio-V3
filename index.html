@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROD QIU — Rider Gear Product Designer | KOGENKI Portfolio</title>
+<meta name="description" content="ROD QIU 產品設計作品集：聚焦騎士裝備、機能服飾與摩托生活產品，呈現從市場分析、CAD/Spec Sheet、OEM 對接、打樣修正到量產上市的完整開發流程。">
+<meta property="og:title" content="ROD QIU — Rider Gear Product Designer">
+<meta property="og:description" content="Rider gear product design portfolio — concept, CAD, spec sheet, OEM communication, production, brand visual system.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Noto+Sans+TC:wght@350;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F1ED;
+  --ink:#16181A;
+  --grey:#85888A;
+  --line:#D6D5CF;
+  --red:#D5281B;
+  --mono:'IBM Plex Mono',monospace;
+  --disp:'Oswald','Noto Sans TC',sans-serif;
+  --body:'Noto Sans TC',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-weight:350;
+  font-size:16px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--red);color:#fff}
+img{display:block;width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+
+/* ── top bar ───────────────────────────── */
+.bar{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 28px;
+  border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(8px);
+}
+.bar .mark{font-family:var(--disp);font-weight:600;letter-spacing:.18em;font-size:15px;text-transform:uppercase}
+.bar .mark span{color:var(--red)}
+.bar nav{display:flex;gap:26px;font-family:var(--mono);font-size:12px;letter-spacing:.08em}
+.bar nav a{position:relative;padding:2px 0}
+.bar nav a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--red);transition:width .25s}
+.bar nav a:hover::after,.bar nav a:focus-visible::after{width:100%}
+a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+
+/* ── side rail (drawing border) ────────── */
+.rail{
+  position:fixed;top:0;bottom:0;left:0;width:34px;z-index:40;
+  border-right:1px solid var(--line);
+  display:flex;align-items:flex-end;justify-content:center;
+  pointer-events:none;
+}
+.rail b{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.3em;
+  color:var(--grey);padding:24px 0;white-space:nowrap;
+}
+main{margin-left:34px}
+@media(max-width:760px){.rail{display:none}main{margin-left:0}}
+
+/* ── hero ──────────────────────────────── */
+.hero{
+  min-height:100svh;
+  display:grid;grid-template-rows:1fr auto;
+  padding:110px 6vw 0;
+}
+.hero-head{align-self:center}
+.hero .eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--grey);
+  display:flex;gap:18px;flex-wrap:wrap;margin-bottom:22px;
+}
+.hero .eyebrow i{font-style:normal;color:var(--red)}
+.hero h1{
+  font-family:var(--disp);font-weight:600;text-transform:uppercase;
+  font-size:clamp(52px,9.5vw,148px);line-height:.96;letter-spacing:.01em;
+}
+.hero h1 .thin{font-weight:400;color:var(--grey)}
+.hero .sub{
+  margin-top:26px;max-width:560px;font-size:17px;
+}
+.hero .sub strong{font-weight:500}
+.hero-img{
+  margin-top:56px;
+  border:1px solid var(--line);border-bottom:none;
+  position:relative;overflow:hidden;
+}
+.hero-img img{transition:transform 1.2s cubic-bezier(.2,.6,.2,1)}
+.hero-img:hover img{transform:scale(1.015)}
+.hero-img .tag{
+  position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:7px 14px;
+}
+
+/* ── section scaffolding ──────────────── */
+section{padding:96px 6vw}
+.sec-head{
+  display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;
+  border-top:1px solid var(--ink);padding-top:18px;margin-bottom:14px;
+}
+.sec-head .no{font-family:var(--mono);font-size:13px;color:var(--red)}
+.sec-head h2{
+  font-family:var(--disp);font-weight:600;text-transform:uppercase;
+  font-size:clamp(30px,4.4vw,56px);letter-spacing:.02em;line-height:1;
+}
+.sec-head .zh{font-size:16px;font-weight:500;color:var(--grey);letter-spacing:.3em}
+.sec-lead{max-width:640px;color:#3c3f41;margin-bottom:48px}
+
+/* ── work sheets ───────────────────────── */
+.grid{display:grid;gap:48px 32px;grid-template-columns:repeat(12,1fr)}
+.sheet{position:relative}
+.s12{grid-column:span 12}.s8{grid-column:span 8}.s7{grid-column:span 7}
+.s6{grid-column:span 6}.s5{grid-column:span 5}.s4{grid-column:span 4}
+@media(max-width:900px){.s8,.s7,.s6,.s5,.s4{grid-column:span 12}}
+.frame{
+  position:relative;border:1px solid var(--line);
+  background:#fff;cursor:zoom-in;overflow:hidden;
+}
+.frame img{transition:transform .8s cubic-bezier(.2,.6,.2,1)}
+.frame:hover img{transform:scale(1.02)}
+/* corner ticks */
+.frame::before,.frame::after,.frame .tick::before,.frame .tick::after{
+  content:"";position:absolute;width:10px;height:10px;z-index:2;
+  border-color:var(--ink);border-style:solid;border-width:0;
+}
+.frame::before{top:-1px;left:-1px;border-top-width:2px;border-left-width:2px}
+.frame::after{top:-1px;right:-1px;border-top-width:2px;border-right-width:2px}
+.frame .tick::before{bottom:-1px;left:-1px;border-bottom-width:2px;border-left-width:2px}
+.frame .tick::after{bottom:-1px;right:-1px;border-bottom-width:2px;border-right-width:2px}
+.meta{
+  display:flex;justify-content:space-between;gap:14px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--grey);
+  border-bottom:1px solid var(--line);
+  padding:9px 2px;margin-bottom:10px;
+}
+.meta b{font-weight:500;color:var(--ink)}
+.cap{font-size:14.5px;color:#3c3f41;margin-top:12px;max-width:60ch}
+.cap strong{font-weight:500;color:var(--ink)}
+
+
+/* ── portfolio upgrade: value / case studies ───────────── */
+.hero .sub{max-width:760px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:40px;padding:9px 16px;border:1px solid var(--ink);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  transition:background .2s,color .2s,border-color .2s,transform .2s;
+}
+.btn:hover{background:var(--ink);color:var(--paper);transform:translateY(-1px)}
+.btn.red{border-color:var(--red);color:var(--red)}
+.btn.red:hover{background:var(--red);color:#fff}
+.hero-kpis{
+  margin-top:34px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--line);border-left:1px solid var(--line);
+}
+.hero-kpis li{list-style:none;padding:14px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero-kpis b{display:block;font-family:var(--disp);font-size:22px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em}
+.hero-kpis span{display:block;margin-top:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;color:var(--grey);text-transform:uppercase}
+@media(max-width:900px){.hero-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.hero-kpis{grid-template-columns:1fr}.hero h1{font-size:clamp(46px,14vw,72px)}}
+
+.cases{padding-top:110px;background:linear-gradient(180deg, color-mix(in srgb,var(--paper) 92%,#fff 8%), var(--paper))}
+.case-stack{display:grid;gap:54px;margin-top:48px}
+.case-card{
+  display:grid;grid-template-columns:minmax(280px,.85fr) minmax(0,1.15fr);gap:34px;
+  border-top:1px solid var(--ink);padding-top:22px;align-items:start;
+}
+.case-copy h3{
+  font-family:var(--disp);font-size:clamp(30px,4vw,54px);line-height:1.02;text-transform:uppercase;letter-spacing:.01em;margin:10px 0 16px;
+}
+.case-kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--red);text-transform:uppercase}
+.case-copy p{color:#3c3f41;max-width:62ch;margin-bottom:16px}
+.case-points{display:grid;gap:10px;margin:20px 0 18px;border-top:1px solid var(--line)}
+.case-points li{list-style:none;display:grid;grid-template-columns:116px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px;color:#3c3f41}
+.case-points b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink);text-transform:uppercase;padding-top:3px}
+.case-result{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--ink);background:#fff;border:1px solid var(--line);padding:12px 14px}
+.case-media{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.case-media .wide{grid-column:span 12}.case-media .half{grid-column:span 6}.case-media .third{grid-column:span 4}
+.case-media .frame{background:#fff}.case-media .meta{margin-bottom:8px;padding-top:0}
+@media(max-width:980px){.case-card{grid-template-columns:1fr}.case-media .half,.case-media .third{grid-column:span 12}}
+
+.archive-note{max-width:840px;margin:-28px 0 48px;color:#3c3f41;border-left:3px solid var(--red);padding-left:18px}
+
+@media(max-width:860px){
+  .bar{align-items:flex-start;gap:12px;padding:12px 18px;flex-direction:column}
+  .bar nav{width:100%;gap:18px;overflow-x:auto;white-space:nowrap;padding-bottom:3px}
+  .hero{padding-top:132px}
+}
+
+/* ── about ─────────────────────────────── */
+.about{background:var(--ink);color:var(--paper)}
+.about .sec-head{border-top-color:var(--paper)}
+.about .sec-head .zh{color:#9a9d9f}
+.about-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;margin-top:40px}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+.about p{color:#C9CBC8;margin-bottom:18px;max-width:58ch}
+.about p strong{color:var(--paper);font-weight:500}
+.spec{border-top:1px solid #3a3d3f}
+.spec li{
+  list-style:none;display:flex;justify-content:space-between;gap:20px;
+  padding:13px 2px;border-bottom:1px solid #3a3d3f;font-size:14.5px;
+}
+.spec li span:first-child{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:#9a9d9f;padding-top:3px;white-space:nowrap}
+.spec li span:last-child{text-align:right}
+
+/* ── footer ────────────────────────────── */
+footer{padding:96px 6vw 56px}
+footer .big{
+  font-family:var(--disp);font-weight:600;text-transform:uppercase;
+  font-size:clamp(38px,7vw,96px);line-height:1;letter-spacing:.01em;
+}
+footer .big a{border-bottom:3px solid var(--ink);transition:color .2s,border-color .2s}
+footer .big a:hover{color:var(--red);border-color:var(--red)}
+.foot-meta{
+  margin-top:46px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--grey);
+  border-top:1px solid var(--line);padding-top:16px;
+}
+
+/* ── lightbox ──────────────────────────── */
+.lb{
+  position:fixed;inset:0;z-index:99;background:rgba(16,18,20,.93);
+  display:none;align-items:center;justify-content:center;padding:4vmin;
+  cursor:zoom-out;
+}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:92vh;width:auto;box-shadow:0 20px 80px rgba(0,0,0,.5)}
+.lb .code{
+  position:absolute;left:24px;bottom:18px;font-family:var(--mono);
+  font-size:12px;letter-spacing:.1em;color:#bbb;
+}
+
+/* ── reveal motion ─────────────────────── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .frame img,.hero-img img{transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="rail"><b>ROD QIU — RIDER GEAR PRODUCT DESIGN — CONCEPT TO PRODUCTION</b></div>
+
+<header class="bar">
+  <a class="mark" href="#top">ROD<span>.</span>QIU</a>
+  <nav>
+    <a href="#cases">CASES</a>
+    <a href="#bags">BAGS</a>
+    <a href="#gloves">GLOVES</a>
+    <a href="#footwear">SHOES</a>
+    <a href="#apparel">APPAREL</a>
+    <a href="#brand">BRAND</a>
+    <a href="#about">ABOUT</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" style="padding-bottom:0">
+  <div class="hero-head rv">
+    <p class="eyebrow"><i>PORTFOLIO 2023–2026</i><span>PRODUCT DESIGN</span><span>OEM DEVELOPMENT</span><span>TAICHUNG, TAIWAN</span></p>
+    <h1>Rider Gear<br><span class="thin">Product Designer</span></h1>
+    <p class="sub">專注於騎士裝備、機能服飾與摩托生活產品。負責 <strong>KOGENKI</strong> 品牌商品開發：從市場趨勢分析、概念草圖、CAD / Spec Sheet、樣品製單與 OEM 廠商對接，到打樣修正、量產上市；同時整合型錄、包裝與電商主視覺，讓產品從圖面真正走到市場。</p>
+    <div class="hero-actions">
+      <a class="btn red" href="#cases">View Case Studies</a>
+      <a class="btn" href="#contact">Contact</a>
+    </div>
+    <ul class="hero-kpis" aria-label="核心能力">
+      <li><b>Product</b><span>Market → Concept → Lineup</span></li>
+      <li><b>CAD / Spec</b><span>Factory-ready handoff</span></li>
+      <li><b>OEM</b><span>Sampling / Revision / Production</span></li>
+      <li><b>Visual</b><span>Catalog / Packaging / E-commerce</span></li>
+    </ul>
+  </div>
+  <figure class="hero-img rv">
+    <span class="tag">KOGENKI — RIDER LIFESTYLE CAMPAIGN / "NOT JUST SHOES. ATTITUDE."</span>
+    <img src="assets/kv-hero-ride.jpg" alt="KOGENKI 鞋類品牌形象視覺，騎乘動態街拍" loading="eager">
+  </figure>
+</section>
+
+
+<!-- 01 SELECTED CASE STUDIES -->
+<section id="cases" class="cases">
+  <div class="sec-head rv">
+    <span class="no">SEC. 01</span>
+    <h2>Selected Case Studies</h2>
+    <span class="zh">產品開發主案例</span>
+  </div>
+  <p class="sec-lead rv">這裡不只展示成品，而是把「為什麼設計、怎麼交付工廠、如何落地量產」攤開來看。作品集主軸從單張圖面升級為完整產品開發能力。</p>
+
+  <div class="case-stack">
+    <article class="case-card rv">
+      <div class="case-copy">
+        <span class="case-kicker">Case 01 / Gloves</span>
+        <h3>Airflux M2<br>Concept to Production</h3>
+        <p>以炎熱通勤情境為起點，將輕量網布、軟式拳眼護具與高辨識配色整合成夏季日常手套。此案完整呈現從概念稿、配色開發到量產實品的閉環。</p>
+        <ul class="case-points">
+          <li><b>Role</b><span>產品概念、三視圖、CMF 配色、量產視覺對位</span></li>
+          <li><b>Decision</b><span>用高透氣網布降低夏季悶熱，同時保留拳眼保護與騎士視覺辨識。</span></li>
+          <li><b>Result</b><span>黑／紅／白三色上市，成為 SS25 手套系列銷售冠軍之一。</span></li>
+        </ul>
+        <p class="case-result">VALUE: 將通勤手套從「配件」提升為可被辨識、可量產、可銷售的系列單品。</p>
+      </div>
+      <div class="case-media">
+        <figure class="wide">
+          <div class="meta"><b>KMG-CO03</b><span>PRODUCTION SAMPLE</span><span>SS25</span></div>
+          <div class="frame" data-code="CASE 01 — AIRFLUX M2 PRODUCTION"><span class="tick"></span><img src="assets/glove-airflux-photo.jpg" alt="Airflux M2 量產實品攝影，黑紅白三色" loading="lazy"></div>
+        </figure>
+        <figure class="half">
+          <div class="meta"><b>CONCEPT</b><span>RED</span></div>
+          <div class="frame" data-code="CASE 01 — CONCEPT RED"><span class="tick"></span><img src="assets/glove-sketch-red.jpg" alt="Airflux M2 紅色概念稿" loading="lazy"></div>
+        </figure>
+        <figure class="half">
+          <div class="meta"><b>COLOR STUDY</b><span>YELLOW</span></div>
+          <div class="frame" data-code="CASE 01 — COLOR STUDY YELLOW"><span class="tick"></span><img src="assets/glove-sketch-yellow.jpg" alt="Airflux M2 螢黃配色開發稿" loading="lazy"></div>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case-card rv">
+      <div class="case-copy">
+        <span class="case-kicker">Case 02 / Footwear</span>
+        <h3>Gale C1 / Stratus C2<br>Urban Riding Shoes</h3>
+        <p>鞋類系列的核心不是「做一雙像車靴的鞋」，而是把防水、護踝、換檔耐磨與日常街鞋輪廓壓在同一個產品語言裡，降低騎士從騎乘到生活場景的切換成本。</p>
+        <ul class="case-points">
+          <li><b>Role</b><span>鞋型部件定義、CAD 圖面、技術模組轉譯、型錄視覺整合</span></li>
+          <li><b>Decision</b><span>以 BOUSUI、atop、Ortholite 等模組建立可被消費者理解的技術敘事。</span></li>
+          <li><b>Result</b><span>Gale C1 與 Stratus C2 形成透氣／防水雙路線，支撐 SS25 鞋類產品線。</span></li>
+        </ul>
+        <p class="case-result">VALUE: 從單品設計推進到產品線架構，讓鞋款能用同一套品牌語言被銷售。</p>
+      </div>
+      <div class="case-media">
+        <figure class="wide">
+          <div class="meta"><b>KO-LSL-03</b><span>GALE C1 CAD</span><span>FACTORY HANDOFF</span></div>
+          <div class="frame" data-code="CASE 02 — GALE C1 CAD"><span class="tick"></span><img src="assets/design-shoecad.jpg" alt="Gale C1 車靴工程圖" loading="lazy"></div>
+        </figure>
+        <figure class="half">
+          <div class="meta"><b>GALE C1</b><span>PRODUCTION</span></div>
+          <div class="frame" data-code="CASE 02 — GALE C1 PRODUCTION"><span class="tick"></span><img src="assets/shoe-gale.jpg" alt="Gale C1 量產實品型錄頁" loading="lazy"></div>
+        </figure>
+        <figure class="half">
+          <div class="meta"><b>STRATUS C2</b><span>PRODUCTION</span></div>
+          <div class="frame" data-code="CASE 02 — STRATUS C2 PRODUCTION"><span class="tick"></span><img src="assets/shoe-stratus.jpg" alt="Stratus C2 量產實品型錄頁" loading="lazy"></div>
+        </figure>
+      </div>
+    </article>
+
+    <article class="case-card rv">
+      <div class="case-copy">
+        <span class="case-kicker">Case 03 / Apparel</span>
+        <h3>VELORA Riding Jacket<br>Spec Sheet to OEM Sample</h3>
+        <p>機能服飾的關鍵在於圖面不能只好看，還要能被工廠讀懂。VELORA 以工程圖、材料製單、工法標註與實穿樣品串成完整開發鏈，讓版型、布料、五金與縫製細節可追蹤。</p>
+        <ul class="case-points">
+          <li><b>Role</b><span>外套 CAD、材料規格製單、參考樣品標註、打樣溝通</span></li>
+          <li><b>Decision</b><span>半網布結構對應夏季通風，反光印刷與可拆頭套補足騎乘安全與日常彈性。</span></li>
+          <li><b>Result</b><span>從 CAD、Spec Sheet 到實穿樣品完成一致落地，降低工廠開版誤差。</span></li>
+        </ul>
+        <p class="case-result">VALUE: 不停在提案圖，而是把設計變成可被打樣、驗證、量產修正的開發文件。</p>
+      </div>
+      <div class="case-media">
+        <figure class="third">
+          <div class="meta"><b>CAD</b><span>FLAT DRAWING</span></div>
+          <div class="frame" data-code="CASE 03 — VELORA CAD"><span class="tick"></span><img src="assets/apparel-velora-cad.jpg" alt="VELORA 半網布防摔外套工程圖" loading="lazy"></div>
+        </figure>
+        <figure class="third">
+          <div class="meta"><b>SPEC</b><span>MATERIAL / TRIM</span></div>
+          <div class="frame" data-code="CASE 03 — VELORA SPEC"><span class="tick"></span><img src="assets/apparel-velora-spec.jpg" alt="VELORA 材料規格製單" loading="lazy"></div>
+        </figure>
+        <figure class="third">
+          <div class="meta"><b>SAMPLE</b><span>ON BODY</span></div>
+          <div class="frame" data-code="CASE 03 — VELORA SAMPLE"><span class="tick"></span><img src="assets/apparel-velora-model.jpg" alt="VELORA 實穿樣品" loading="lazy"></div>
+        </figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 02 BAGS -->
+<section id="bags">
+  <div class="sec-head rv">
+    <span class="no">SEC. 02</span>
+    <h2>Bags &amp; Carry</h2>
+    <span class="zh">包款設計</span>
+  </div>
+  <p class="sec-lead rv">騎士視角出發的攜行系統：防水捲口結構、車裝固定點、夜間反光細節。每一件從 2D 工程圖開始，定義版型、五金與織帶配置，再進入打樣與量產。</p>
+  <p class="archive-note rv">以下區塊保留完整產品線與視覺作品，用來支撐「作品量」；真正的主敘事已前移到 Case Studies，避免觀看者只滑圖、不理解你的開發價值。</p>
+
+  <div class="grid">
+    <figure class="sheet s7 rv">
+      <div class="meta"><b>KO-RSBP-01</b><span>WATERPROOF BACKPACK / 16L</span><span>MASS PROD.</span></div>
+      <div class="frame" data-code="KO-RSBP-01 — TECHNICAL FLAT"><span class="tick"></span><img src="assets/bag-urbandrift-flat.jpg" alt="Urban Drift 後背包三視工程圖" loading="lazy"></div>
+      <figcaption class="cap"><strong>Urban Drift 三視工程圖</strong>——針對通勤騎士「安全帽暫掛、雨天防水、停車後快速取物」三個痛點，將交叉織帶、捲口開合與磁吸金屬鉤整合成單一攜行流程；量產前以此圖面與工廠對齊縫線與五金規格。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>KO-LB-01</b><span>DROP-LEG BAG</span><span>CMF STUDY</span></div>
+      <div class="frame" data-code="KO-LB-01 — DROP-LEG BAG"><span class="tick"></span><img src="assets/design-legbag.jpg" alt="腿包設計圖，沙色與灰綠雙色彩配置" loading="lazy"></div>
+      <figcaption class="cap"><strong>防水腿包 CMF 提案</strong>——沙色／灰螢光雙配色，防水拉鍊與快拆腿帶配置。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>KO-CB-01</b><span>CHEST RIG</span><span>CMF STUDY</span></div>
+      <div class="frame" data-code="KO-CB-01 — CHEST RIG"><span class="tick"></span><img src="assets/design-chestbag.jpg" alt="胸包設計圖正視角，雙配色" loading="lazy"></div>
+      <figcaption class="cap"><strong>胸掛包結構圖</strong>——Y 字背帶與單手快扣，正面防水拉鍊袋為主收納，騎乘時重心貼合胸口。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>KO-BP-02</b><span>FLAP BACKPACK</span><span>3D RENDER</span></div>
+      <div class="frame" data-code="KO-BP-02 — FLAP BACKPACK"><span class="tick"></span><img src="assets/design-backpack.jpg" alt="掀蓋式後背包 3D 渲染圖" loading="lazy"></div>
+      <figcaption class="cap"><strong>掀蓋式通勤後背包</strong>——軍裝式雙插扣蓋板搭配側邊網袋，底部反光條對應夜間騎乘安全。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 03 GLOVES -->
+<section id="gloves">
+  <div class="sec-head rv">
+    <span class="no">SEC. 03</span>
+    <h2>Gloves</h2>
+    <span class="zh">手套設計</span>
+  </div>
+  <p class="sec-lead rv">從賽道級競賽手套到日常通勤款，橫跨性能、都會經典、日常通勤三條產品線。以下呈現從手繪概念、向量工程圖、配色開發到實品攝影／擬真模擬的完整歷程。</p>
+
+  <div class="grid">
+    <figure class="sheet s7 rv">
+      <div class="meta"><b>XMS-R1</b><span>RACE GLOVE — TECHNICAL FLAT</span><span>性能騎士款</span></div>
+      <div class="frame" data-code="XMS-R1 — RACE GLOVE CAD"><span class="tick"></span><img src="assets/glove-xmsr1-cad.jpg" alt="XMS-R1 賽道競賽手套工程圖，黑白紅配色掌背與掌心視圖" loading="lazy"></div>
+      <figcaption class="cap"><strong>XMS-R1 競賽手套工程圖</strong>——長筒護腕設計，碳纖維拳眼護具搭配獨立浮動指節片。掌側耐磨護塊與腕部雙重固定帶一次標定，是系列中防護規格最高的賽道級手套。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>XMS-R1</b><span>RACE GLOVE — RENDER</span><span>BLACK / WHITE / RED</span></div>
+      <div class="frame" data-code="XMS-R1 — RACE GLOVE RENDER"><span class="tick"></span><img src="assets/glove-xmsr1-render.jpg" alt="XMS-R1 賽道競賽手套擬真模擬圖，黑白紅配色" loading="lazy"></div>
+      <figcaption class="cap"><strong>XMS-R1 擬真模擬</strong>——從左方工程圖延伸的材質與光影模擬，驗證碳纖護具反光、麂皮掌心與配色在實物上的呈現。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>KMG-CO03</b><span>CONCEPT SKETCH / RED</span><span>PHASE 1</span></div>
+      <div class="frame" data-code="KMG-CO03 — CONCEPT SKETCH"><span class="tick"></span><img src="assets/glove-sketch-red.jpg" alt="通勤手套概念設計圖，紅黑迷彩配色三視角" loading="lazy"></div>
+      <figcaption class="cap"><strong>Airflux M2 概念稿（紅）</strong>——掌背、掌心、側視三視角，定義軟式拳眼護具範圍與迷彩印花走向。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>KMG-CO03</b><span>CONCEPT SKETCH / YELLOW</span><span>PHASE 1</span></div>
+      <div class="frame" data-code="KMG-CO03 — COLOR STUDY"><span class="tick"></span><img src="assets/glove-sketch-yellow.jpg" alt="通勤手套概念設計圖，黃黑迷彩配色三視角" loading="lazy"></div>
+      <figcaption class="cap"><strong>配色開發（螢黃）</strong>——同版型替換色彩計畫，評估通勤族群的辨識度與日夜視認性。</figcaption>
+    </figure>
+
+    <figure class="sheet s12 rv">
+      <div class="meta"><b>KMG-CO03</b><span>AIRFLUX M2 — PRODUCTION SAMPLE</span><span>SS25 / 量產上市</span></div>
+      <div class="frame" data-code="KMG-CO03 — AIRFLUX M2"><span class="tick"></span><img src="assets/glove-airflux-photo.jpg" alt="Airflux M2 量產實品攝影，黑紅白三色" loading="lazy"></div>
+      <figcaption class="cap"><strong>Airflux M2 量產實品</strong>——超輕量網布結構，黑／紅／白三色到位。從左頁概念稿到右頁實品，完整走完開發閉環；本款為 SS25 系列銷售冠軍之一。</figcaption>
+    </figure>
+
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>KMG-CR01</b><span>CAD / MUSTARD</span></div>
+      <div class="frame" data-code="KMG-CR01 — CAD MUSTARD"><span class="tick"></span><img src="assets/glove-cad-mustard.jpg" alt="復古手套工程圖，芥末黃配色" loading="lazy"></div>
+      <figcaption class="cap">復古打孔皮革手套工程圖——芥末黃。</figcaption>
+    </figure>
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>KMG-CR01</b><span>CAD / CREAM</span></div>
+      <div class="frame" data-code="KMG-CR01 — CAD CREAM"><span class="tick"></span><img src="assets/glove-cad-cream.jpg" alt="復古手套工程圖，米白配色" loading="lazy"></div>
+      <figcaption class="cap">米白配色——細節含觸控指尖與腕扣皮標。</figcaption>
+    </figure>
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>KMG-CR01</b><span>CAD / BLACK &amp; TAN</span></div>
+      <div class="frame" data-code="KMG-CR01 — CAD BLACK"><span class="tick"></span><img src="assets/glove-cad-black.jpg" alt="復古手套工程圖，黑色配色" loading="lazy"></div>
+      <figcaption class="cap">黑色款——掌心防滑與護具配置同步標示。</figcaption>
+    </figure>
+
+    <figure class="sheet s7 rv">
+      <div class="meta"><b>KMG-CR01</b><span>STORMRIDER C7 — PRODUCTION</span><span>SS25</span></div>
+      <div class="frame" data-code="KMG-CR01 — STORMRIDER C7"><span class="tick"></span><img src="assets/glove-stormrider-photo.jpg" alt="Stormrider C7 量產實品攝影，棕、黑、米白三色" loading="lazy"></div>
+      <figcaption class="cap"><strong>Stormrider C7 量產實品</strong>——山羊皮 95%、浮動式拳眼護具。Vintage Soul, Modern Armor：左方工程圖的每一道沖孔與滾邊，在實品上一比一落地。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>KMG-CR01</b><span>CAD / TAN + SPEC SHEET</span></div>
+      <div class="frame" data-code="KMG-CR01 — CAD TAN"><span class="tick"></span><img src="assets/glove-cad-tan.jpg" alt="復古手套工程圖，駝色配色" loading="lazy"></div>
+      <figcaption class="cap">駝色工程圖——對應實品棕色款，含掌心黑色耐磨拼接定位。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 04 FOOTWEAR -->
+<section id="footwear">
+  <div class="sec-head rv">
+    <span class="no">SEC. 04</span>
+    <h2>Footwear</h2>
+    <span class="zh">鞋類設計</span>
+  </div>
+  <p class="sec-lead rv">城市騎士系列車靴：防水、護踝、換檔耐磨，外型卻要像一雙好看的街鞋。由 3D 工程圖定義楦型與部件，再整合 BOUSUI 防水、atop 旋鈕、Ortholite 鞋墊等技術模組。</p>
+
+  <div class="grid">
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>KO-LSL-03</b><span>GALE C1 — CAD</span><span>DEV. PHASE</span></div>
+      <div class="frame" data-code="KO-LSL-03 — GALE C1 CAD"><span class="tick"></span><img src="assets/design-shoecad.jpg" alt="Gale C1 車靴工程圖，含鞋底與護片視圖" loading="lazy"></div>
+      <figcaption class="cap"><strong>Gale C1 工程圖</strong>——atop 旋鈕快旋系統、鞋舌護片與大底胎紋分解視圖，所有部件以單一圖面交付工廠。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>KO-LSL-03</b><span>GALE C1 — PRODUCTION</span><span>SS25</span></div>
+      <div class="frame" data-code="KO-LSL-03 — GALE C1"><span class="tick"></span><img src="assets/shoe-gale.jpg" alt="Gale C1 量產實品型錄頁，三色展開" loading="lazy"></div>
+      <figcaption class="cap"><strong>Gale C1 量產上市</strong>——Black/Gum、Black、Grey 三色，輕量透氣定位炎熱通勤情境；把護踝與快旋系統藏進街鞋輪廓，降低日常穿搭門檻。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>KO-LSL-02</b><span>STRATUS C2 — PRODUCTION</span><span>SS25</span></div>
+      <div class="frame" data-code="KO-LSL-02 — STRATUS C2"><span class="tick"></span><img src="assets/shoe-stratus.jpg" alt="Stratus C2 量產實品型錄頁" loading="lazy"></div>
+      <figcaption class="cap"><strong>Stratus C2 量產上市</strong>——全季節防水通勤靴，YKK 側拉鍊快穿設計；與 Gale C1 共同形成「透氣／防水」雙路線鞋類架構。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>TECH MODULES</b><span>BOUSUI / ATOP / ORTHOLITE</span></div>
+      <div class="frame" data-code="TECH MODULE SHEET"><span class="tick"></span><img src="assets/shoe-tech.jpg" alt="技術模組頁：atop 旋鈕、BOUSUI 防水、UrbanShield 護踝" loading="lazy"></div>
+      <figcaption class="cap"><strong>技術模組整合</strong>——將防水、旋鈕、護踝等供應商技術轉譯為消費者語言，建立品牌自有的技術命名系統。</figcaption>
+    </figure>
+
+    <figure class="sheet s12 rv">
+      <div class="meta"><b>KOGENKI × PREXPORT</b><span>RACING BOOT — LATERAL VIEW</span><span>2024/08</span></div>
+      <div class="frame" data-code="KOGENKI × PREXPORT RACING BOOT"><span class="tick"></span><img src="assets/design-raceboot.jpg" alt="KOGENKI x PREXPORT 聯名賽車靴側視設計圖" loading="lazy"></div>
+      <figcaption class="cap"><strong>聯名賽車靴開發案</strong>——與義大利 PREXPORT 合作的競技靴，黑／紅／白配色計畫，含滑塊、護踝模組與品牌共標配置。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 05 APPAREL -->
+<section id="apparel">
+  <div class="sec-head rv">
+    <span class="no">SEC. 05</span>
+    <h2>Apparel</h2>
+    <span class="zh">服飾設計</span>
+  </div>
+  <p class="sec-lead rv">機能騎士服飾從工程圖、材料規格製單（spec sheet）一路走到實穿驗證。每件都標定布料編號、工法與五金，附參考樣品供工廠對位——這份製單就是交付 OEM 的開版依據。</p>
+
+  <div class="grid">
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>VELORA 01</b><span>HALF-MESH JACKET — CAD</span><span>防摔外套</span></div>
+      <div class="frame" data-code="VELORA — TECHNICAL FLAT"><span class="tick"></span><img src="assets/apparel-velora-cad.jpg" alt="VELORA 半網布防摔外套三視工程圖，含可拆頭套" loading="lazy"></div>
+      <figcaption class="cap"><strong>VELORA 半網布防摔外套・工程圖</strong>——正面、側面、背面與可拆式頭套四視角，定義網布範圍、反光印刷位置與連結拉鍊結構。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>VELORA 01</b><span>SPEC SHEET / 製單</span><span>01 SPEC</span></div>
+      <div class="frame" data-code="VELORA — SPEC SHEET"><span class="tick"></span><img src="assets/apparel-velora-spec.jpg" alt="VELORA 防摔外套材料規格製單，標註布料、五金與工法" loading="lazy"></div>
+      <figcaption class="cap"><strong>材料規格製單</strong>——逐項標註防風尼龍、大網眼、3mm 彈力抽繩、防水拉鍊等材料編號，配合領口車翻、魔鬼氈、彈力束口等工法說明，並附 KOMINE JK-179 參考樣品供工廠對位。<strong>這張即是交付工廠的開版依據</strong>。</figcaption>
+    </figure>
+
+    <figure class="sheet s12 rv">
+      <div class="meta"><b>VELORA 01</b><span>SAMPLE — ON BODY</span><span>實穿樣品</span></div>
+      <div class="frame" data-code="VELORA — ON BODY"><span class="tick"></span><img src="assets/apparel-velora-model.jpg" alt="VELORA 防摔外套實穿樣品，黑色全身" loading="lazy"></div>
+      <figcaption class="cap"><strong>VELORA 實穿樣品</strong>——從工程圖到 spec 製單再到實品，完整走完一件機能服飾的開發閉環；半網布結構在實穿上呈現出設計圖預期的透氣分區與版型。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>PUFFER</b><span>DOWN JACKET — CAD</span><span>防風羽絨</span></div>
+      <div class="frame" data-code="PUFFER — TECHNICAL FLAT"><span class="tick"></span><img src="assets/apparel-down-cad.jpg" alt="防風羽絨外套工程圖，正背視角" loading="lazy"></div>
+      <figcaption class="cap"><strong>防風羽絨外套・工程圖</strong>——格紋車線分倉與羅紋肩線結構定義。</figcaption>
+    </figure>
+
+    <figure class="sheet s7 rv">
+      <div class="meta"><b>PUFFER</b><span>SPEC SHEET / 製單</span></div>
+      <div class="frame" data-code="PUFFER — SPEC SHEET"><span class="tick"></span><img src="assets/apparel-down-spec.jpg" alt="防風羽絨外套規格製單，標註布料與填充" loading="lazy"></div>
+      <figcaption class="cap"><strong>羽絨外套製單</strong>——標註粗羅紋布料、尼龍防潑水面料、羽絨棉填充，含織標 LOGO 與固定織帶位置，並附 ONE BOY 參考樣品。</figcaption>
+    </figure>
+
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>PUFFER</b><span>SAMPLE — ON BODY</span></div>
+      <div class="frame" data-code="PUFFER — ON BODY"><span class="tick"></span><img src="assets/apparel-down-model.jpg" alt="防風羽絨外套實穿樣品，黑色" loading="lazy"></div>
+      <figcaption class="cap"><strong>羽絨外套實穿</strong>——方格分倉在實品上的蓬度與版型驗證。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>RIDING JACKET</b><span>SOFTSHELL — CAD</span><span>防摔外套</span></div>
+      <div class="frame" data-code="RIDING JACKET — FLAT"><span class="tick"></span><img src="assets/apparel-jacket2-cad.jpg" alt="第二件防摔外套工程圖，含頭套與多視角配色" loading="lazy"></div>
+      <figcaption class="cap"><strong>防摔外套・多配色工程圖</strong>——上下兩色系提案，含可拆頭套與褲裝成套規劃。</figcaption>
+    </figure>
+
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>RIDING JACKET</b><span>SAMPLE — ON BODY</span></div>
+      <div class="frame" data-code="RIDING JACKET — ON BODY"><span class="tick"></span><img src="assets/apparel-jacket2-model.jpg" alt="第二件防摔外套實穿樣品，淺灰色" loading="lazy"></div>
+      <figcaption class="cap"><strong>防摔外套實穿</strong>——淺灰軟殼配色，側邊網布與束口結構落地。</figcaption>
+    </figure>
+
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>TRACKSUIT</b><span>SAMPLE — ON BODY</span><span>運動套裝</span></div>
+      <div class="frame" data-code="TRACKSUIT — ON BODY"><span class="tick"></span><img src="assets/apparel-tracksuit-model.jpg" alt="運動套裝實穿樣品，黑灰配色" loading="lazy"></div>
+      <figcaption class="cap"><strong>運動套裝提案</strong>——復古機能風配色拼接，外套＋長褲成套。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 06 BRAND -->
+<section id="brand">
+  <div class="sec-head rv">
+    <span class="no">SEC. 06</span>
+    <h2>Catalog &amp; Brand</h2>
+    <span class="zh">型錄與品牌視覺</span>
+  </div>
+  <p class="sec-lead rv">產品之外，同時負責品牌對外的每一個視覺接觸點：季度型錄的攝影調性與版面系統、電商主視覺 banner、零售包裝結構、聯名活動視覺。以 Illustrator / Photoshop 完成從去背、合成到版面編排的全部美編工作。</p>
+
+  <div class="grid">
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>SS25</b><span>GLOVES CATALOG</span></div>
+      <div class="frame" data-code="SS25 GLOVES CATALOG — COVER"><span class="tick"></span><img src="assets/glove-cover.jpg" alt="SS25 手套型錄封面" loading="lazy"></div>
+      <figcaption class="cap">手套型錄封面——實拍堆疊構圖＋手寫筆刷字。</figcaption>
+    </figure>
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>SS25</b><span>FOOTWEAR CATALOG</span></div>
+      <div class="frame" data-code="SS25 FOOTWEAR CATALOG — COVER"><span class="tick"></span><img src="assets/shoe-cover.jpg" alt="SS25 鞋類型錄封面" loading="lazy"></div>
+      <figcaption class="cap">城市騎士系列型錄封面——「為行動而生，為領先而穿。」</figcaption>
+    </figure>
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>PKG</b><span>SHOE BOX DIELINE</span></div>
+      <div class="frame" data-code="SHOE BOX DIELINE"><span class="tick"></span><img src="assets/design-shoebox.jpg" alt="鞋盒包裝刀模設計圖" loading="lazy"></div>
+      <figcaption class="cap">鞋盒刀模圖——黑底紅標，含尺寸表與 QR 區配置。</figcaption>
+    </figure>
+
+    <figure class="sheet s7 rv">
+      <div class="meta"><b>SS25</b><span>PRODUCT LINEUP SPREAD</span></div>
+      <div class="frame" data-code="SS25 LINEUP SPREAD"><span class="tick"></span><img src="assets/glove-lineup.jpg" alt="SS25 手套全系列產品線跨頁" loading="lazy"></div>
+      <figcaption class="cap"><strong>系列架構跨頁</strong>——性能騎士／都會經典／日常通勤三線分類，每款附價格、圖標化技術規格與雙語文案，建立可延續多季的版面系統。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>SS25</b><span>PRODUCT FEATURE SPREAD</span></div>
+      <div class="frame" data-code="TEMPEST R2 FEATURE SPREAD"><span class="tick"></span><img src="assets/glove-tempest.jpg" alt="Tempest R2 產品形象跨頁" loading="lazy"></div>
+      <figcaption class="cap"><strong>單品形象跨頁</strong>——情境攝影 × 三色直立排列，左感性右理性的固定敘事節奏。</figcaption>
+    </figure>
+
+    <figure class="sheet s12 rv">
+      <div class="meta"><b>E-COMMERCE KV</b><span>水洗復古包 / RETRO COLLECTION</span><span>2026</span></div>
+      <div class="frame" data-code="BANNER — RETRO BAG"><span class="tick"></span><img src="assets/banner-retro-bag.jpg" alt="水洗復古包電商主視覺 banner，雙模特 Y2K 風格" loading="lazy"></div>
+      <figcaption class="cap"><strong>電商主視覺・水洗復古包</strong>——Y2K／washed denim 主題，雙模特對稱構圖搭配貼紙式裝飾元素，主圖去背合成與字體編排一手完成，用於商城首頁與社群投放。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>E-COMMERCE KV</b><span>STORMRIDER C7</span></div>
+      <div class="frame" data-code="BANNER — STORMRIDER C7"><span class="tick"></span><img src="assets/banner-stormrider.jpg" alt="Stormrider C7 手套電商 banner，復古視窗 UI 元素" loading="lazy"></div>
+      <figcaption class="cap"><strong>手套上市 banner</strong>——以 Y2K 視窗 UI 為梗包裝產品科技感，三色實品＋模特情境，含售價與賣點圖標。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>E-COMMERCE KV</b><span>URBAN DRIFT 16L</span></div>
+      <div class="frame" data-code="BANNER — URBAN DRIFT"><span class="tick"></span><img src="assets/banner-urbandrift.jpg" alt="Urban Drift 後背包電商 banner，雙模特置物櫃場景" loading="lazy"></div>
+      <figcaption class="cap"><strong>後背包 banner</strong>——清新生活感調性，四大賣點圖標化（防水／反光／容量／筆電收納），對應通勤客群。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>E-COMMERCE KV</b><span>GALE C1</span></div>
+      <div class="frame" data-code="BANNER — GALE C1"><span class="tick"></span><img src="assets/banner-galec1.jpg" alt="Gale C1 車靴電商 banner，戶外仰角情境" loading="lazy"></div>
+      <figcaption class="cap"><strong>車鞋 banner・Gale C1</strong>——延用形象攝影，手寫字體疊壓＋售價，維持鞋類系列的視覺一致性。</figcaption>
+    </figure>
+
+    <figure class="sheet s6 rv">
+      <div class="meta"><b>E-COMMERCE KV</b><span>STRATUS C2</span></div>
+      <div class="frame" data-code="BANNER — STRATUS C2"><span class="tick"></span><img src="assets/banner-stratusc2.jpg" alt="Stratus C2 車靴電商 banner，三色與細節拆解" loading="lazy"></div>
+      <figcaption class="cap"><strong>車鞋 banner・Stratus C2</strong>——情境主圖＋三色側欄＋四格細節拆解，把「防水／防護／日常」三大訴求一頁說清。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 07 BRAND VISUALS -->
+<section id="visuals">
+  <div class="sec-head rv">
+    <span class="no">SEC. 07</span>
+    <h2>Brand Visuals</h2>
+    <span class="zh">品牌形象</span>
+  </div>
+  <p class="sec-lead rv">產品落地之後，是把它放回騎士的真實生活裡。這組形象企劃由我擔任美術指導——從情境設定、攝影調性到主視覺字體與標語，目標是把 KOGENKI 從「機車部品」拉升為一種騎乘生活態度。</p>
+
+  <div class="grid">
+    <figure class="sheet s7 rv">
+      <div class="meta"><b>CAMPAIGN</b><span>NOT JUST SHOES. ATTITUDE.</span><span>FOOTWEAR KV</span></div>
+      <div class="frame" data-code="FOOTWEAR KV — GREY RIDE"><span class="tick"></span><img src="assets/kv-shoe-grey-ride.jpg" alt="灰藍車靴騎乘動態主視覺" loading="lazy"></div>
+      <figcaption class="cap"><strong>鞋類主視覺・騎乘動態</strong>——以高速殘影凍結踩檔瞬間，標語置中、機能與街頭感並存，定義整季鞋類的視覺語言。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>LIFESTYLE</b><span>GALE C1 — STREET</span></div>
+      <div class="frame" data-code="LIFESTYLE — GREY SIT"><span class="tick"></span><img src="assets/kv-shoe-grey-sit.jpg" alt="灰色車靴街拍坐姿情境" loading="lazy"></div>
+      <figcaption class="cap"><strong>日常情境</strong>——atop 旋鈕車靴搭配丹寧，把護踝機能藏進街頭穿搭。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>LIFESTYLE</b><span>STRATUS C2 — RAIL</span></div>
+      <div class="frame" data-code="LIFESTYLE — BLACK RAIL"><span class="tick"></span><img src="assets/kv-shoe-black-rail.jpg" alt="黑色車靴欄杆坐姿仰角情境" loading="lazy"></div>
+      <figcaption class="cap"><strong>仰角構圖</strong>——低角度＋藍天，強調鞋型輪廓與全黑配色的俐落。</figcaption>
+    </figure>
+
+    <figure class="sheet s7 rv">
+      <div class="meta"><b>CAMPAIGN</b><span>REDEFINING THE RIDE.</span><span>BRAND KV</span></div>
+      <div class="frame" data-code="BRAND KV — W230 TOP"><span class="tick"></span><img src="assets/kv-brand-w230-top.jpg" alt="Kawasaki W230 俯角騎士品牌形象" loading="lazy"></div>
+      <figcaption class="cap"><strong>品牌態度主視覺</strong>——俯角捕捉騎士與 Kawasaki W230 的關係，手寫筆刷字疊壓畫面，傳達復古騎乘文化的品牌定位。</figcaption>
+    </figure>
+
+    <figure class="sheet s5 rv">
+      <div class="meta"><b>LIFESTYLE</b><span>FULL LOOK — BACKPACK</span></div>
+      <div class="frame" data-code="LIFESTYLE — BACKPACK RIDER"><span class="tick"></span><img src="assets/kv-brand-backpack-rider.jpg" alt="騎士背防水後背包側面形象" loading="lazy"></div>
+      <figcaption class="cap"><strong>全身穿搭</strong>——把後背包、皮衣、復古全罩串成一套完整的騎士造型敘事。</figcaption>
+    </figure>
+
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>LIFESTYLE</b><span>HELMET × GLOVE</span></div>
+      <div class="frame" data-code="LIFESTYLE — HELMET GLOVE"><span class="tick"></span><img src="assets/kv-brand-helmet-glove.jpg" alt="復古全罩安全帽與米白手套特寫" loading="lazy"></div>
+      <figcaption class="cap"><strong>配件特寫</strong>——米白手套與復古全罩的質感對話。</figcaption>
+    </figure>
+
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>CAMPAIGN</b><span>REV UP YOUR STYLE</span></div>
+      <div class="frame" data-code="BRAND KV — BERLIN"><span class="tick"></span><img src="assets/kv-brand-berlin.jpg" alt="騎士坐於 Kawasaki W230 形象，BERLIN 主標" loading="lazy"></div>
+      <figcaption class="cap"><strong>聯名活動主視覺</strong>——「BERLIN」字體主導畫面，連結通路活動。</figcaption>
+    </figure>
+
+    <figure class="sheet s4 rv">
+      <div class="meta"><b>LIFESTYLE</b><span>CAFE RACER SIT</span></div>
+      <div class="frame" data-code="LIFESTYLE — CAFE SIT"><span class="tick"></span><img src="assets/kv-brand-cafe-sit.jpg" alt="騎士坐於咖啡騎風格機車形象" loading="lazy"></div>
+      <figcaption class="cap"><strong>人物情境</strong>——皮衣＋全罩的咖啡騎氛圍，呼應品牌的復古調性。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="sec-head rv">
+    <span class="no">SEC. 08</span>
+    <h2 style="color:var(--paper)">About</h2>
+    <span class="zh">關於我</span>
+  </div>
+  <div class="about-grid">
+    <div class="rv">
+      <p>我是一名<strong>騎士裝備與機能產品設計師</strong>，現任 KOGENKI 品牌產品開發與創意主導。我的工作不是只產出好看的提案圖，而是把產品從<strong>市場分析、概念設計、CAD / Spec Sheet、樣品製單、OEM 溝通、打樣修正到量產驗貨</strong>完整推進。</p>
+      <p>我相信騎士裝備的好設計是<strong>「防護不能妥協，日常也要穿得住」</strong>。Protective gear 不該只停在賽道語言，它可以融入通勤、街頭穿搭與長途旅行，讓騎士不需要在安全與風格之間二選一。</p>
+      <p>我的優勢在於能同時理解產品結構、材料工法與品牌視覺：熟悉皮革、Clarino、防水織物、TPR / 碳纖護具等材料應用，能以 Illustrator / Photoshop 建立工廠可讀的圖面，也能延伸成型錄、包裝與電商主視覺，縮短從圖面到市場的距離。</p>
+    </div>
+    <ul class="spec rv">
+      <li><span>ROLE</span><span>Rider Gear Product Designer / 開發主導</span></li>
+      <li><span>SCOPE</span><span>Market → CAD → Spec Sheet → OEM → Production</span></li>
+      <li><span>CATEGORY</span><span>手套・鞋靴・包款・機能服飾・電商視覺</span></li>
+      <li><span>TOOLS</span><span>Illustrator / Photoshop / AI Image Workflow</span></li>
+      <li><span>BRAND</span><span>Catalog・Packaging・Campaign・E-commerce KV</span></li>
+      <li><span>BASE</span><span>台中，台灣</span></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <p class="eyebrow" style="font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--grey);margin-bottom:18px">AVAILABLE FOR PRODUCT DESIGN / RIDER GEAR DEVELOPMENT / BRAND VISUAL PROJECTS</p>
+  <p class="big rv">Build products<br><a href="mailto:rod28442020@gmail.com">that reach production.</a></p>
+  <p style="margin-top:20px;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--ink)">rod28442020@gmail.com</p>
+  <div class="foot-meta">
+    <span>© 2026 ROD QIU</span>
+    <span>RIDER GEAR PRODUCT DESIGN PORTFOLIO</span>
+    <span>MADE IN TAICHUNG, TW</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-label="放大檢視">
+  <img id="lbImg" src="" alt="">
+  <span class="code" id="lbCode"></span>
+</div>
+
+<script>
+// lightbox
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbCode=document.getElementById('lbCode');
+document.querySelectorAll('.frame').forEach(f=>{
+  f.addEventListener('click',()=>{
+    const img=f.querySelector('img');
+    lbImg.src=img.src;lbImg.alt=img.alt;
+    lbCode.textContent=f.dataset.code||'';
+    lb.classList.add('open');document.body.style.overflow='hidden';
+  });
+});
+lb.addEventListener('click',()=>{lb.classList.remove('open');document.body.style.overflow=''});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow=''}});
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
